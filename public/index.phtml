@@ -1,0 +1,163 @@
+<?php declare(strict_types=1); ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoRide — Accueil</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script defer type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <?php require_once __DIR__ . '/includes/header.phtml'; ?>
+
+  <!-- ======= Contenu principal ======= -->
+  <main class="page" id="content">
+
+    <!-- =================== Hero =================== -->
+    <section class="hero" aria-label="Hero EcoRide">
+      <div class="layout-container hero__content">
+        <h1 class="hero__title">
+          <span class="word-eco">Eco</span><span class="word-ride">Ride</span>
+        </h1>
+        <p class="hero__subtitle">Roulez ensemble, respirez mieux</p>
+      </div>
+    </section>
+
+    <!-- =================== Recherche trajet =================== -->
+    <section class="search-bar" aria-label="Recherche de covoiturage">
+      <div class="layout-container">
+        <div class="search-card">
+          <h2 class="search-title">Rechercher un covoiturage</h2>
+
+          <form class="search-form" action="#" method="get" role="search">
+            <div class="search-form__fields">
+              <div class="mb-3">
+                <label for="from" class="form-label">Ville de départ</label>
+                <input type="text" id="from" name="from" class="form-control" placeholder="Paris, Lille..." autocomplete="off" />
+              </div>
+
+              
+              <button type="button" class="swap-btn" id="swapCities" aria-label="Inverser départ et arrivée" title="Inverser">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7h10M7 7l2.5-2.5M7 7l2.5 2.5M17 17H7M17 17l-2.5-2.5M17 17l-2.5 2.5"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="mb-3">
+                <label for="to" class="form-label">Ville d'arrivée</label>
+                <input type="text" id="to" name="to" class="form-control" placeholder="Marseille, Lyon..." autocomplete="off" />
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Date de départ</label>
+                <input type="date" id="date" name="date" class="form-control" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success search-form__submit">Rechercher</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== Nos Objectifs =================== -->
+    <section class="feature feature--objectives" aria-labelledby="objectifs-title">
+      <div class="layout-container grid-2">
+        <div class="feature__image">
+          <img src="assets/img/objectif.jpg" alt="Illustration covoiturage écoresponsable" />
+        </div>
+        <div class="feature__content">
+          <h2 class="section-title" id="objectifs-title">Nos Objectifs</h2>
+          <p>
+            EcoRide réduit l’impact des déplacements en facilitant le covoiturage en voiture.
+            Nous remplissons les sièges vides pour limiter les émissions.
+            Une solution simple, économique et plus respectueuse de l’environnement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== Conducteurs vérifiés =================== -->
+    <section class="feature feature--trust" aria-labelledby="trust-title">
+      <div class="layout-container grid-2 grid-2--reverse">
+        <div class="feature__content">
+          <h2 class="section-title" id="trust-title">Conducteurs vérifiés, trajets sereins</h2>
+          <p>
+            Chez EcoRide, la confiance passe avant tout. Chaque conducteur valide une vérification de profil
+            avant de proposer un trajet. Voyagez l’esprit léger : nous appliquons des critères clairs de qualité
+            et de sécurité pour tous.
+          </p>
+        </div>
+        <div class="feature__image">
+          <img src="assets/img/conducteur.jpg" alt="Conducteur vérifié et sécurisé" />
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== Derniers trajets =================== -->
+    <section class="rides" aria-labelledby="rides-title">
+      <div class="layout-container">
+        <h2 class="section-title" id="rides-title">Derniers trajets proposés</h2>
+
+        <div class="table-wrapper">
+          <table class="rides__table" id="ridesTable" data-limit="3">
+            <thead>
+              <tr>
+                <th scope="col">Trajet</th>
+                <th scope="col">Prix par personne</th>
+                <th scope="col">Conducteur</th>
+                <th scope="col">Place(s) restante(s)</th>
+                <th scope="col">Détails</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>
+                  <strong>Lyon → Grenoble</strong><br>
+                  <span class="text-muted small">02/10/2025 · 08:30—10:00</span>
+                </td>
+                <td>12 €</td>
+                <td>Camille</td>
+                <td>3</td>
+                <td><a class="btn btn-outline-primary btn-sm" href="detail.phtml">Détail</a></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>Lyon → Grenoble</strong><br>
+                  <span class="text-muted small">02/10/2025 · 17:15—18:45</span>
+                </td>
+                <td>10 €</td>
+                <td>Alex</td>
+                <td>2</td>
+                <td><a class="btn btn-outline-primary btn-sm" href="detail.phtml">Détail</a></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>Paris → Rouen</strong><br>
+                  <span class="text-muted small">03/10/2025 · 09:00—10:45</span>
+                </td>
+                <td>14 €</td>
+                <td>Nora</td>
+                <td>3</td>
+                <td><a class="btn btn-outline-primary btn-sm" href="detail.phtml">Détail</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <?php require_once __DIR__ . '/includes/footer.phtml'; ?>
+</body>
+</html>

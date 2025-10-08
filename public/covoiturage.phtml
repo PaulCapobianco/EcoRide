@@ -1,0 +1,405 @@
+<?php declare(strict_types=1); ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoRide — Covoiturage</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script defer type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+  <?php require_once __DIR__ . '/includes/header.phtml'; ?>
+
+  <main class="page">
+
+    <section class="search-bar" aria-label="Recherche de covoiturage">
+      <div class="layout-container">
+        <div class="search-card">
+          <h1 class="section-title">Rechercher un covoiturage</h1>
+          <form class="search-form" action="covoiturage.phtml" method="get" role="search">
+            <div class="search-form__fields">
+              <div class="mb-3">
+                <label for="from" class="form-label">Ville de départ</label>
+                <input type="text" id="from" name="from" class="form-control" placeholder="Paris, Lille..." autocomplete="off" />
+              </div>
+
+              <button type="button" class="swap-btn" id="swapCities" aria-label="Inverser départ et arrivée" title="Inverser">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7h10M7 7l2.5-2.5M7 7l2.5 2.5M17 17H7M17 17l-2.5-2.5M17 17l-2.5 2.5"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="mb-3">
+                <label for="to" class="form-label">Ville d'arrivée</label>
+                <input type="text" id="to" name="to" class="form-control" placeholder="Marseille, Lyon..." autocomplete="off" />
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Date de départ</label>
+                <input type="date" id="date" name="date" class="form-control" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success search-form__submit">Rechercher</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="rides" aria-labelledby="rides-title">
+      <div class="layout-container">
+        <div class="row g-4">
+          <aside class="col-lg-3">
+            <button class="btn btn-outline-secondary w-100 d-lg-none mb-2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#filtersCollapse"
+                    aria-expanded="false" aria-controls="filtersCollapse">
+              Afficher / masquer les filtres
+            </button>
+
+            <div class="filter-card collapse d-lg-block" id="filtersCollapse">
+              <h2 class="h5 mb-3">Filtres</h2>
+
+              <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" id="filterEco">
+                <label class="form-check-label" for="filterEco">Trajets éco uniquement</label>
+              </div>
+
+              <div class="mb-3">
+                <label for="filterPrice" class="form-label d-flex justify-content-between">
+                  <span>Prix max (€)</span>
+                  <span id="priceValue" class="filter-value">25 €</span>
+                </label>
+                <input type="range" class="form-range" id="filterPrice" min="5" max="50" step="1" value="25">
+              </div>
+
+              <div class="mb-3">
+                <label for="filterDuration" class="form-label d-flex justify-content-between">
+                  <span>Durée max (h)</span>
+                  <span id="durationValue" class="filter-value">4 h</span>
+                </label>
+                <input type="range" class="form-range" id="filterDuration" min="1" max="8" step="1" value="4">
+              </div>
+
+              <div class="mb-3">
+                <label for="filterRating" class="form-label">Note minimale</label>
+                <select id="filterRating" class="form-select">
+                  <option value="">Toutes</option>
+                  <option value="3">★ 3 et +</option>
+                  <option value="4">★ 4 et +</option>
+                  <option value="4.5">★ 4.5 et +</option>
+                </select>
+              </div>
+
+              <button class="btn btn-light w-100">Réinitialiser</button>
+            </div>
+          </aside>
+
+          <div class="col-lg-9">
+            <h2 class="section-title" id="rides-title">Résultats</h2>
+
+            <div class="rides-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Camille</strong>
+                        <div class="text-muted small">★ 4.8</div>
+                      </div>
+                      <!-- Remplacement du badge -->
+                      <span class="badge bg-success ms-auto">EcoRider</span>
+                    </div>
+
+                    <h3 class="h6 mb-1">Lyon → Grenoble</h3>
+                    <div class="text-muted small mb-2">02/10/2025 · 08:30—10:00</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>3 place(s)</span>
+                      <span>12 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Alex</strong>
+                        <div class="text-muted small">★ 4.5</div>
+                      </div>
+                    </div>
+
+                    <h3 class="h6 mb-1">Lyon → Grenoble</h3>
+                    <div class="text-muted small mb-2">02/10/2025 · 17:15—18:45</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>2 place(s)</span>
+                      <span>10 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Nora</strong>
+                        <div class="text-muted small">★ 4.9</div>
+                      </div>
+                      <!-- Remplacement du badge -->
+                      <span class="badge bg-success ms-auto">EcoRider</span>
+                    </div>
+
+                    <h3 class="h6 mb-1">Paris → Rouen</h3>
+                    <div class="text-muted small mb-2">03/10/2025 · 09:00—10:45</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>3 place(s)</span>
+                      <span>14 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Mehdi</strong>
+                        <div class="text-muted small">★ 4.6</div>
+                      </div>
+                    </div>
+
+                    <h3 class="h6 mb-1">Marseille → Aix-en-Provence</h3>
+                    <div class="text-muted small mb-2">04/10/2025 · 08:10—08:50</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>1 place(s)</span>
+                      <span>6 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Julie</strong>
+                        <div class="text-muted small">★ 4.7</div>
+                      </div>
+                      <!-- Remplacement du badge -->
+                      <span class="badge bg-success ms-auto">EcoRider</span>
+                    </div>
+
+                    <h3 class="h6 mb-1">Bordeaux → Toulouse</h3>
+                    <div class="text-muted small mb-2">04/10/2025 · 18:00—20:15</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>2 place(s)</span>
+                      <span>16 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Anne</strong>
+                        <div class="text-muted small">★ 4.2</div>
+                      </div>
+                    </div>
+
+                    <h3 class="h6 mb-1">Nantes → Rennes</h3>
+                    <div class="text-muted small mb-2">05/10/2025 · 07:30—09:00</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>1 place(s)</span>
+                      <span>9 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Omar</strong>
+                        <div class="text-muted small">★ 4.9</div>
+                      </div>
+                      <!-- Remplacement du badge -->
+                      <span class="badge bg-success ms-auto">EcoRider</span>
+                    </div>
+
+                    <h3 class="h6 mb-1">Lille → Paris</h3>
+                    <div class="text-muted small mb-2">05/10/2025 · 18:20—20:10</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>4 place(s)</span>
+                      <span>15 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Sarah</strong>
+                        <div class="text-muted small">★ 4.3</div>
+                      </div>
+                    </div>
+
+                    <h3 class="h6 mb-1">Nice → Cannes</h3>
+                    <div class="text-muted small mb-2">06/10/2025 · 10:00—10:40</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>1 place(s)</span>
+                      <span>7 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="ride-card card h-100">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="avatar avatar--placeholder" aria-hidden="true">
+                        <svg class="avatar__icon" viewBox="0 0 24 24">
+                          <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <div class="ms-2">
+                        <strong>Hugo</strong>
+                        <div class="text-muted small">★ 4.4</div>
+                      </div>
+                      <!-- Remplacement du badge -->
+                      <span class="badge bg-success ms-auto">EcoRider</span>
+                    </div>
+
+                    <h3 class="h6 mb-1">Strasbourg → Metz</h3>
+                    <div class="text-muted small mb-2">06/10/2025 · 14:15—15:45</div>
+
+                    <div class="ride-card__meta mb-3">
+                      <span>2 place(s)</span>
+                      <span>13 € / pers.</span>
+                    </div>
+
+                    <a class="btn btn-outline-primary w-100" href="detail.phtml">Détail</a>
+                  </div>
+                </article>
+              </div>
+
+            </div>
+
+            <nav class="mt-4" aria-label="Pagination des trajets">
+              <ul class="pagination justify-content-center flex-wrap gap-2 mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="" tabindex="-1" aria-disabled="true">Précédent</a>
+                </li>
+                <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="">2</a></li>
+                <li class="page-item"><a class="page-link" href="">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="">Suivant</a>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <?php require_once __DIR__ . '/includes/footer.phtml'; ?>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<?php declare(strict_types=1); ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoRide — Mon profil</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script defer type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+  <?php require_once __DIR__ . '/includes/header.phtml'; ?>
+  <main class="page page-profile">
+    <section class="layout-container profile-wrap">
+
+      <header class="profile-header">
+        <div class="ph-left">
+          <div class="profile-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" aria-label="Utilisateur">
+              <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 20c0-3.9 3.8-6 8-6s8 2.1 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="profile-id">
+            <h1 class="profile-name">Paul</h1>
+            <p class="profile-meta">paul.user@example.com • Membre depuis 2024</p>
+          </div>
+        </div>
+
+        <div class="ph-right">
+          <div class="stat-card"><div class="stat-value">20</div><div class="stat-label">crédits</div></div>
+          <div class="stat-card"><div class="stat-value">12</div><div class="stat-label">trajets</div></div>
+          <div class="stat-card"><div class="stat-value">4,8</div><div class="stat-label">note</div></div>
+        </div>
+      </header>
+
+      <div class="profile-layout">
+        <aside class="settings-aside">
+          <h2 class="settings-title">Paramètres</h2>
+          <nav class="settings-nav" aria-label="Navigation profil">
+            <a href="#section-compte" class="settings-link is-active">Mon compte</a>
+            <a href="#section-role" class="settings-link">Rôle & statut</a>
+            <a href="#section-preferences" class="settings-link" data-requires="driver">Préférences conducteur</a>
+            <a href="#section-vehicules" class="settings-link" data-requires="driver">Véhicules</a>
+            <a href="#section-paiements" class="settings-link">Paiements</a>
+            <a href="#section-securite" class="settings-link">Sécurité</a>
+          </nav>
+        </aside>
+       
+        <div class="settings-content">
+
+          <section id="section-compte" class="settings-section card profile-card">
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Mon compte</h2>
+                <a href="#section-compte" class="btn btn-outline-secondary btn-sm">Modifier</a>
+              </div>
+              <div class="row g-3 mt-1">
+                <div class="col-12 col-md-6">
+                  <div class="info-line"><span class="info-label">Nom</span><span class="info-value">User</span></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="info-line"><span class="info-label">Prénom</span><span class="info-value">Paul</span></div>
+                </div>
+                <div class="col-12">
+                  <div class="info-line"><span class="info-label">E-mail</span><span class="info-value">paul.user@example.com</span></div>
+                </div>
+                <div class="col-12">
+                  <div class="info-line"><span class="info-label">Téléphone</span><span class="info-value">+33 6 12 34 56 78</span></div>
+                </div>
+                <div class="col-12">
+                  <div class="info-line"><span class="info-label">Adresse</span><span class="info-value">12 rue de la République, 13001 Marseille</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-role" class="settings-section card profile-card">
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Rôle & statut</h2>
+              </div>
+              <p class="mb-2">Choisissez votre rôle principal.</p>
+              <div class="role-switch-inline" role="radiogroup" aria-label="Rôle du compte">
+                <input type="radio" class="btn-check" name="role-inline" id="role2-passager" value="passenger" autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="role2-passager">Passager</label>
+
+                <input type="radio" class="btn-check" name="role-inline" id="role2-conducteur" value="driver" autocomplete="off">
+                <label class="btn btn-outline-success" for="role2-conducteur">Conducteur</label>
+
+                <input type="radio" class="btn-check" name="role-inline" id="role2-both" value="both" autocomplete="off">
+                <label class="btn btn-outline-success" for="role2-both">Les deux</label>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-preferences" class="settings-section card profile-card" data-requires="driver" hidden>
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Préférences conducteur</h2>
+                <!-- ✨ Ajout : bouton “Ajouter une préférence” (placeholder, pas d’action pour le moment) -->
+                <div class="card-actions d-flex gap-2">
+                  <a href="#section-preferences" class="btn btn-outline-secondary btn-sm">Modifier tout</a>
+                  <button type="button" class="btn btn-success btn-sm" data-action="add-pref" aria-label="Ajouter une préférence">
+                    Ajouter une préférence
+                  </button>
+                </div>
+              </div>
+
+              <div class="pref-list">
+                <button type="button" class="pref-pill" data-pref="music" aria-pressed="false">Musique</button>
+                <button type="button" class="pref-pill" data-pref="ac" aria-pressed="false">Climatisation</button>
+                <button type="button" class="pref-pill" data-pref="pets" aria-pressed="false">Animaux</button>
+                <button type="button" class="pref-pill" data-pref="baggage" aria-pressed="false">Bagages volumineux</button>
+                <button type="button" class="pref-pill" data-pref="noSmoking" aria-pressed="true">Non-fumeur</button>
+              </div>
+
+              <small class="text-muted d-block mt-2">Ces préférences apparaissent sur vos annonces conducteur.</small>
+            </div>
+          </section>
+
+          <section id="section-vehicules" class="settings-section card profile-card" data-requires="driver" hidden>
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Véhicules</h2>
+                <div class="card-actions d-flex gap-2">
+                  <a href="#section-vehicules" class="btn btn-outline-secondary btn-sm">Modifier</a>
+                  <a href="new-vehicule.phtml" class="btn btn-success btn-sm">Ajouter une voiture</a>
+                </div>
+              </div>
+
+              <div class="vehicle-card">
+                <div class="vehicle-line"><span class="vehicle-label">Marque/Modèle</span><span class="vehicle-value">Peugeot 308</span></div>
+                <div class="vehicle-line"><span class="vehicle-label">Couleur</span><span class="vehicle-value">Bleu</span></div>
+                <div class="vehicle-line"><span class="vehicle-label">Places</span><span class="vehicle-value">4</span></div>
+                <div class="vehicle-line"><span class="vehicle-label">Immatriculation</span><span class="vehicle-value">AB-123-CD</span></div>
+
+                <!-- ✨ Ajout : Énergie (+ badge EcoRider si écologique) -->
+                <div class="vehicle-line">
+                  <span class="vehicle-label">Énergie</span>
+                  <span class="vehicle-value">
+                    Hybride
+                    <span class="badge bg-success ms-2">EcoRider</span>
+                  </span>
+                </div>
+
+                <div class="vehicle-line">
+                  <span class="vehicle-label">Date 1<sup>ère</sup> immatriculation</span>
+                  <span class="vehicle-value">12/05/2017</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="section-paiements" class="settings-section card profile-card">
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Paiements</h2>
+                <a href="#section-paiements" class="btn btn-outline-secondary btn-sm">Gérer</a>
+              </div>
+              <ul class="mb-0">
+                <li>Méthode : Virement bancaire</li>
+                <li>IBAN masqué : FR76 **** **** **12 34</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="section-securite" class="settings-section card profile-card">
+            <div class="card-body">
+              <div class="card-title-row">
+                <h2 class="card-title mb-0">Sécurité</h2>
+                <a href="#section-securite" class="btn btn-outline-secondary btn-sm">Paramétrer</a>
+              </div>
+              <ul class="mb-0">
+                <li>Vérification e-mail : <strong>OK</strong></li>
+                <li>2FA : <strong>Désactivé</strong></li>
+              </ul>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <?php require_once __DIR__ . '/includes/footer.phtml'; ?>
+</body>
+</html>

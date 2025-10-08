@@ -1,0 +1,161 @@
+<?php declare(strict_types=1); ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoRide — Créer un compte</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script defer type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <?php require_once __DIR__ . '/includes/header.phtml'; ?>
+
+  <main class="page page-auth d-flex align-items-start align-items-md-center justify-content-center py-4 py-md-5">
+    <div class="auth-card w-100" style="max-width: 760px;">
+      <h1 class="auth-title">Créer un compte</h1>
+      <p class="text-center text-muted mb-4" style="font-family:'LoraLocal', Georgia, 'Times New Roman', serif;">
+        Rejoignez la communauté EcoRide 🌿
+      </p>
+
+      <form action="#" method="post" class="needs-validation" novalidate>
+        <p class="small text-muted mb-3">Les champs marqués d’un <span class="text-danger">*</span> sont obligatoires.</p>
+
+        <div class="row g-3">
+          <!-- Prénom / Nom -->
+          <div class="col-12 col-md-6">
+            <label for="si-firstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="si-firstname" name="firstname" placeholder="Prénom" required>
+            <div class="invalid-feedback">Veuillez saisir votre prénom.</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="si-lastname" class="form-label">Nom <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="si-lastname" name="lastname" placeholder="Nom" required>
+            <div class="invalid-feedback">Veuillez saisir votre nom.</div>
+          </div>
+
+          <!-- Email / Pseudo -->
+          <div class="col-12 col-md-6">
+            <label for="si-email" class="form-label">Adresse e-mail <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="si-email" name="email" placeholder="vous@exemple.com" required>
+            <div class="invalid-feedback">Veuillez saisir une adresse e-mail valide.</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="si-username" class="form-label">Pseudo <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="si-username" name="username" placeholder="ex : Paul-13" required>
+            <div class="invalid-feedback">Veuillez choisir un pseudo.</div>
+          </div>
+
+          <!-- Téléphone / Date de naissance -->
+          <div class="col-12 col-md-6">
+            <label for="si-phone" class="form-label">Téléphone <span class="text-danger">*</span></label>
+            <input type="tel"
+                   class="form-control"
+                   id="si-phone"
+                   name="phone"
+                   placeholder="+33 6 12 34 56 78"
+                   inputmode="tel"
+                   pattern="^[0-9+() \-]{6,}$"
+                   required>
+            <div class="invalid-feedback">Veuillez indiquer un numéro valide.</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="si-birth" class="form-label">Date de naissance <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="si-birth" name="birthdate" required>
+            <div class="invalid-feedback">Veuillez sélectionner votre date de naissance.</div>
+          </div>
+
+          <!-- Adresse (Rue en pleine largeur) -->
+          <div class="col-12">
+            <label class="form-label">Adresse postale <span class="text-danger">*</span></label>
+
+            <!-- 1ère ligne : Rue pleine largeur -->
+            <div class="mb-2">
+              <input type="text"
+                     class="form-control"
+                     id="si-address"
+                     name="address"
+                     placeholder="N°, rue…"
+                     required>
+              <div class="invalid-feedback">Veuillez saisir votre adresse.</div>
+            </div>
+
+            <!-- 2e ligne : Code postal + Ville -->
+            <div class="row g-3">
+              <div class="col-12 col-md-4">
+                <label for="si-zip" class="form-label">Code postal <span class="text-danger">*</span></label>
+                <input type="text"
+                       class="form-control"
+                       id="si-zip"
+                       name="zip"
+                       placeholder="Code postal"
+                       inputmode="numeric"
+                       pattern="\d{4,6}"
+                       required>
+                <div class="invalid-feedback">Code postal invalide.</div>
+              </div>
+
+              <div class="col-12 col-md-8">
+                <label for="si-city" class="form-label">Ville <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="si-city" name="city" placeholder="Ville" required>
+                <div class="invalid-feedback">Veuillez indiquer votre ville.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="col-12">
+            <label for="si-password" class="form-label">Mot de passe <span class="text-danger">*</span></label>
+            <input type="password"
+                   class="form-control"
+                   id="si-password"
+                   name="password"
+                   placeholder="Au moins 8 caractères"
+                   minlength="8"
+                   pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}"
+                   title="8 caractères minimum, dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial."
+                   required>
+            <div class="form-text">
+              Doit contenir au minimum <strong>1 majuscule</strong>, <strong>1 minuscule</strong>, <strong>1 chiffre</strong> et
+              <strong>1 caractère spécial</strong>.
+            </div>
+            <div class="invalid-feedback">
+              Mot de passe non conforme.
+            </div>
+          </div>
+
+          <!-- CGU -->
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="1" id="si-terms" required>
+              <label class="form-check-label" for="si-terms">
+                J’accepte les conditions générales et la politique de confidentialité <span class="text-danger">*</span>
+              </label>
+              <div class="invalid-feedback">Vous devez accepter les conditions pour continuer.</div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-success w-100">
+              Créer mon compte
+            </button>
+          </div>
+
+          <!-- Lien connexion -->
+          <div class="col-12 text-center">
+            <p class="mb-0 mt-2">
+              Déjà inscrit ? <a href="login.phtml" class="auth-create">Se connecter</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <?php require_once __DIR__ . '/includes/footer.phtml'; ?>
+</body>
+</html>
