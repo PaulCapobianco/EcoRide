@@ -121,7 +121,7 @@ EcoRide/
 ```
 
 
-## 🧰 Git (débutant) — mon workflow simple
+## Git 
 
 Branches utilisées :
 - **main** : version stable (à montrer/publier)
@@ -130,7 +130,7 @@ Branches utilisées :
 
 ### 1) Récupérer le projet
 ```bash
-git clone <URL_DU_REPO>
+git clone <https://github.com/PaulCapobianco/Ecoride>
 cd EcoRide
 ```
 
@@ -166,13 +166,6 @@ git switch main
 git pull
 git merge --no-ff developpement
 git push
-
-# (optionnel) Taguer une version
-git tag -a v1.0.0 -m "EcoRide — première version stable"
-git push origin v1.0.0
 ```
 
-> Astuces :
-> - Toujours travailler sur `test`, puis intégrer dans `developpement`, puis publier sur `main`.
-> - Sur GitHub, tu peux faire les merges via **Pull Request** (plus propre et plus clair).
-> - Si Git dit que des fichiers ne sont pas suivis ou supprimés, utilise `git add -A` pour tout prendre (ajouts, modifs, suppressions).
+
